@@ -21,5 +21,8 @@ jobs:
         - name: Lint
           run: deno lint
   
+        - name: Native Library Build 🏗
+          run: deno run --allow-all build.ts
+
         - name: Tests
           run: deno test --unstable --allow-all

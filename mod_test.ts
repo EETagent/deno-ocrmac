@@ -1,6 +1,9 @@
 import OCRMac, { Orientation, RecognitionLevel } from "./mod.ts";
 
-import { assertStrictEquals, assertRejects } from "https://deno.land/std@0.202.0/assert/mod.ts";
+import {
+  assertRejects,
+  assertStrictEquals,
+} from "https://deno.land/std@0.202.0/assert/mod.ts";
 
 Deno.test("OCRMac", async () => {
   using ocr = new OCRMac();
@@ -24,12 +27,11 @@ Deno.test("OCRMac", async () => {
 });
 
 Deno.test("OCRMac", () => {
-  assertRejects( () => {
+  assertRejects(() => {
     using ocr = new OCRMac();
 
     return ocr.getTextFromImageByteArray(
       new Uint8Array([0, 1, 2, 3, 4, 5, 6, 7, 8]),
     );
   });
-
 });

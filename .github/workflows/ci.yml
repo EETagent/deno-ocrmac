@@ -1,0 +1,25 @@
+name: Deno 🦕
+
+on: [push, pull_request]
+
+jobs:
+    build:
+      runs-on: macos-latest
+      steps:
+        - name: Checkout 🚚
+          uses: actions/checkout@v4
+
+        - name: Setup Deno 🦕
+          uses: denoland/setup-deno@v1
+  
+        - name: Format 💅
+          run: deno fmt --check
+  
+        - name: Check
+          run: deno check --remote mod.ts --unstable
+  
+        - name: Lint
+          run: deno lint
+  
+        - name: Tests
+          run: deno test --unstable --allow-all

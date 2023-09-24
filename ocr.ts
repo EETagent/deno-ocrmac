@@ -9,7 +9,7 @@ import lib from "./lib.ts";
 /**
  * Represents an Vision OCR instance that can recognize text from images.
  * Should be disposed using using 😝.
- * @class 
+ * @class
  */
 export class OCRMac {
   private libPath: string;

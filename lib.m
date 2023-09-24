@@ -22,6 +22,7 @@ int8_t getTextFromImageByteArray(uint8_t *buffer, uint64 len, uint8_t recognitio
         if (err) {
             blockError = [err copy];
             dispatch_semaphore_signal(semaphore);
+            return;
         }
 
         NSArray *results = [request results];

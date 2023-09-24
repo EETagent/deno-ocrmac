@@ -1,3 +1,5 @@
+import * as base64 from "https://deno.land/std@0.202.0/encoding/base64.ts";
+
 // Creates a universal library for both Intel and Apple Silicon
 const compileProcess = new Deno.Command("clang", {
   args: [
@@ -31,6 +33,10 @@ if (!compileStatus.success) {
 // Pack the library into a Uint8Array ts file
 const lib = await Deno.readFile("lib.dylib");
 
-const libExport = `export default new Uint8Array([${lib.toString()}]);`;
+const libBase64 = base64.encode(lib);
+
+const libExport =
+  `import * as base64 from "https://deno.land/std@0.202.0/encoding/base64.ts";
+export default base64.decode("${libBase64}");`;
 
 await Deno.writeTextFile("lib.ts", libExport);

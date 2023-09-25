@@ -26,14 +26,7 @@ export class OCRMac {
 
     Deno.writeFileSync(this.libPath, lib);
 
-    // Load the shared library using Deno.dlopen
-    this.lib = Deno.dlopen(this.libPath, {
-      getTextFromImageByteArray: {
-        parameters: ["buffer", "u64", "u8", "bool", "u8", "buffer", "buffer"],
-        result: "u8",
-        nonblocking: true,
-      },
-    });
+    this.lib = loadLibrary(this.libPath);
   }
 
   /**

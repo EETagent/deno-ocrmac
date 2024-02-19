@@ -4,7 +4,7 @@
 
 // -framework Foundation -framework Vision -framework CoreGraphics
 
-int8_t getTextFromImageByteArray(uint8_t *buffer, uint64 len, uint8_t recognitionLevel, bool languageCorrection, uint8_t imageOrientation, const char **text, const char **error) {
+int8_t getTextFromImageByteArray(const uint8_t *buffer, uint64 len, uint8_t recognitionLevel, bool languageCorrection, uint8_t imageOrientation, const char **text, const char **error) {
     NSData *data = [NSData dataWithBytes:buffer length:len];
     
     NSImage *image = [[NSImage alloc] initWithData:data];

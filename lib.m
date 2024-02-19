@@ -31,8 +31,8 @@ int8_t getTextFromImageByteArray(uint8_t *buffer, uint64 len, uint8_t recognitio
 
         for (VNRecognizedTextObservation *observation in results) {
             CGRect boundingBox = [observation boundingBox];
-            float w = boundingBox.size.width, h = boundingBox.size.height;
-            float x = boundingBox.origin.x, y = boundingBox.origin.y;
+            double w = boundingBox.size.width, h = boundingBox.size.height;
+            double x = boundingBox.origin.x, y = boundingBox.origin.y;
 
             NSString *text = [[observation topCandidates:1][0] string];
 

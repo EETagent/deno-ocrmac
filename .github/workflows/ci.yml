@@ -16,7 +16,7 @@ jobs:
           run: deno fmt --check
   
         - name: Check
-          run: deno check --remote mod.ts --unstable
+          run: deno check --remote mod.ts --unstable-ffi
   
         - name: Lint
           run: deno lint
@@ -25,4 +25,4 @@ jobs:
           run: deno run --allow-all build.ts
 
         - name: Tests
-          run: deno test --unstable --allow-all
+          run: deno test --unstable-ffi --allow-all

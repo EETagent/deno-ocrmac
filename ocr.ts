@@ -1,3 +1,4 @@
+import { Result } from "./api.ts";
 import {
   getTextFromImageByteArray,
   loadLibrary,
@@ -43,7 +44,7 @@ export class OCRMac {
     recognitionLevel = RecognitionLevel.Accurate,
     languageCorrection = false,
     imageOrientation = Orientation.Up,
-  ): Promise<string> {
+  ): Promise<Result> {
     return await getTextFromImageByteArray(
       this.lib,
       bytes,

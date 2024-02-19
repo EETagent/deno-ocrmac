@@ -1,5 +1,5 @@
-#include <AppKit/AppKit.h>
-
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 #import <Vision/Vision.h>
 
 // -framework Foundation -framework Vision -framework CoreGraphics
@@ -13,7 +13,8 @@ int8_t getTextFromImageByteArray(uint8_t *buffer, uint64 len, uint8_t recognitio
 
     VNImageRequestHandler *vnImageHandler = [[VNImageRequestHandler alloc] initWithCGImage:cgImage orientation:imageOrientation
                                                                                    options:@{}];
-    __block NSString *blockOutput = nil;
+    __block NSMutableArray<NSDictionary *> *blockOutput = [NSMutableArray new];
+    
     __block NSError *blockError = nil;
 
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
@@ -29,13 +30,30 @@ int8_t getTextFromImageByteArray(uint8_t *buffer, uint64 len, uint8_t recognitio
         //NSLog(@"results: %@", results);
 
         for (VNRecognizedTextObservation *observation in results) {
+            CGRect boundingBox = [observation boundingBox];
+            float w = boundingBox.size.width, h = boundingBox.size.height;
+            float x = boundingBox.origin.x, y = boundingBox.origin.y;
+
             NSString *text = [[observation topCandidates:1][0] string];
+
+            NSDictionary *result = @{
+                @"text": text,
+                @"boundingBox": @{
+                    @"x": @(x),
+                    @"y": @(y),
+                    @"w": @(w),
+                    @"h": @(h)
+                }
+            };
+
+            [blockOutput addObject:result];
+            //NSLog(@"text: %@", result);
             //NSLog(@"text: %@", text);
-            blockOutput = [text copy];
         }
 
         dispatch_semaphore_signal(semaphore);
     }];
+
 
     [vnTextRequest setRecognitionLevel:recognitionLevel];
     [vnTextRequest setUsesLanguageCorrection:languageCorrection];
@@ -44,7 +62,7 @@ int8_t getTextFromImageByteArray(uint8_t *buffer, uint64 len, uint8_t recognitio
     [vnImageHandler performRequests:@[vnTextRequest] error:&requestError];
 
     dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
-
+    
     if (requestError) {
         *error = [[requestError localizedDescription] UTF8String];
         return 1;
@@ -55,8 +73,17 @@ int8_t getTextFromImageByteArray(uint8_t *buffer, uint64 len, uint8_t recognitio
         return 1;
     }
 
-    //printf("%s", [blockOutput UTF8String]);
-    *text = [blockOutput UTF8String];
+    NSError *jsonError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:blockOutput options:NSJSONWritingPrettyPrinted error:&jsonError];
+
+    if (jsonError) {
+        *error = [[jsonError localizedDescription] UTF8String];
+        return 2;
+    }
+
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding]; 
+
+    *text = [jsonString UTF8String];
 
     return 0;
 }

@@ -36,13 +36,25 @@ export enum Orientation {
   RightMirrored = 7,
 }
 
+export type BoundingBox = {
+  y: number;
+  w: number;
+  x: number;
+  h: number;
+};
+
+export type Result = Array<{
+  boundingBox: BoundingBox;
+  text: string;
+}>;
+
 export const getTextFromImageByteArray = async (
   dylib: Dylib,
   bytes: Uint8Array,
   recognitionLevel = RecognitionLevel.Accurate,
   languageCorrection = false,
-  imageOrientation = Orientation.Up,
-): Promise<string> => {
+  imageOrientation = Orientation.Up
+): Promise<Result> => {
   const textPtr = new BigUint64Array(1);
   const errorPtr = new BigUint64Array(1);
 
@@ -53,7 +65,7 @@ export const getTextFromImageByteArray = async (
     languageCorrection,
     imageOrientation,
     textPtr,
-    errorPtr,
+    errorPtr
   );
 
   if (code !== 0) {
@@ -71,5 +83,5 @@ export const getTextFromImageByteArray = async (
   }
   const text = new Deno.UnsafePointerView(ptr).getCString();
 
-  return text;
+  return JSON.parse(text) as Result;
 };

@@ -1,9 +1,9 @@
 import OCRMac, { Orientation, RecognitionLevel } from "./mod.ts";
 
 import {
+  assertGreater,
   assertRejects,
   assertStrictEquals,
-  assertGreater,
 } from "https://deno.land/std@0.216.0/assert/mod.ts";
 
 Deno.test("OCRMac Single Word Test", async () => {
@@ -43,7 +43,7 @@ Deno.test("OCRMac GitHub Landing Page Test", async () => {
     Deno.readFileSync("./images/test_github.png"),
   );
   console.log(result);
-  
+
   assertGreater(result.length, 20);
 
   // TODO: Add more tests

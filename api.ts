@@ -53,7 +53,7 @@ export const getTextFromImageByteArray = async (
   bytes: Uint8Array,
   recognitionLevel = RecognitionLevel.Accurate,
   languageCorrection = false,
-  imageOrientation = Orientation.Up
+  imageOrientation = Orientation.Up,
 ): Promise<Result> => {
   const textPtr = new BigUint64Array(1);
   const errorPtr = new BigUint64Array(1);
@@ -65,7 +65,7 @@ export const getTextFromImageByteArray = async (
     languageCorrection,
     imageOrientation,
     textPtr,
-    errorPtr
+    errorPtr,
   );
 
   if (code !== 0) {

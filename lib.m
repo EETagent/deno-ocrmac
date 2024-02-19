@@ -33,11 +33,9 @@ int8_t getTextFromImageByteArray(uint8_t *buffer, uint64 len, uint8_t recognitio
             CGRect boundingBox = [observation boundingBox];
             double w = boundingBox.size.width, h = boundingBox.size.height;
             double x = boundingBox.origin.x, y = boundingBox.origin.y;
-
-            NSString *text = [[observation topCandidates:1][0] string];
-
+            
             NSDictionary *result = @{
-                @"text": text,
+                @"text":  [[observation topCandidates:1][0] string],
                 @"boundingBox": @{
                     @"x": @(x),
                     @"y": @(y),

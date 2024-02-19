@@ -54,7 +54,7 @@ int8_t getTextFromImageByteArray(uint8_t *buffer, uint64 len, uint8_t recognitio
 
 
     [vnTextRequest setRecognitionLevel:recognitionLevel];
-    [vnTextRequest setUsesLanguageCorrection:languageCorrection];
+    [vnTextRequest setUsesLanguageCorrection:languageCorrection ? YES : NO];
 
     NSError *requestError = nil;
     [vnImageHandler performRequests:@[vnTextRequest] error:&requestError];

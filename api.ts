@@ -5,6 +5,11 @@ export const loadLibrary = (path: string) =>
       result: "u8",
       nonblocking: true,
     },
+    freeString: {
+      parameters: ["pointer"],
+      result: "void",
+      nonblocking: true,
+    },
   });
 
 type Dylib = ReturnType<typeof loadLibrary>;
@@ -74,6 +79,9 @@ export const getTextFromImageByteArray = async (
       throw new Error("Error pointer is null");
     }
     const error = new Deno.UnsafePointerView(ptr).getCString();
+
+    dylib.symbols.freeString(ptr);
+
     throw new Error(error);
   }
 
@@ -82,6 +90,8 @@ export const getTextFromImageByteArray = async (
     throw new Error("Text pointer is null");
   }
   const text = new Deno.UnsafePointerView(ptr).getCString();
+
+  dylib.symbols.freeString(ptr);
 
   return JSON.parse(text) as Result;
 };

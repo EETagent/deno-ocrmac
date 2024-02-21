@@ -17,6 +17,7 @@ const compileProcess = new Deno.Command("clang", {
     "-framework",
     "AppKit",
     "-shared",
+    "-fobjc-arc",
     "-o",
     "lib.dylib",
   ],

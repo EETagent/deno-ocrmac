@@ -4,7 +4,7 @@ import {
   assertGreater,
   assertRejects,
   assertStrictEquals,
-} from "https://deno.land/std@0.216.0/assert/mod.ts";
+} from "jsr:@std/assert";
 
 Deno.test("OCRMac Single Word Test", async () => {
   using ocr = new OCRMac();

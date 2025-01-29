@@ -65,7 +65,7 @@ export const getTextFromImageByteArray = async (
 
   const code = await dylib.symbols.getTextFromImageByteArray(
     bytes,
-    bytes.length,
+    BigInt(bytes.length),
     recognitionLevel,
     languageCorrection,
     imageOrientation,

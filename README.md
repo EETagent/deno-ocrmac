@@ -1,4 +1,3 @@
-
 ```typescript
 import OCRMac, {
   Orientation,
@@ -16,7 +15,6 @@ const result = await ocr.getTextFromImageByteArray(
 
 console.log(result);
 ```
-
 
 ```typescript
 /**

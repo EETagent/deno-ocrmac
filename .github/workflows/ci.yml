@@ -3,26 +3,26 @@ name: Deno 🦕
 on: [push, pull_request]
 
 jobs:
-    build:
-      runs-on: macos-latest
-      steps:
-        - name: Checkout 🚚
-          uses: actions/checkout@v4
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout 🚚
+        uses: actions/checkout@v4
 
-        - name: Setup Deno 🦕
-          uses: denoland/setup-deno@v2
-  
-        - name: Format 💅
-          run: deno fmt --check
-  
-        - name: Check
-          run: deno check --remote mod.ts
-  
-        - name: Lint
-          run: deno lint
-  
-        - name: Native Library Build 🏗
-          run: deno run --allow-all build.ts
+      - name: Setup Deno 🦕
+        uses: denoland/setup-deno@v2
 
-        - name: Tests
-          run: deno test --allow-all
+      - name: Format 💅
+        run: deno fmt --check
+
+      - name: Check
+        run: deno check --remote mod.ts
+
+      - name: Lint
+        run: deno lint
+
+      - name: Native Library Build 🏗
+        run: deno run --allow-all build.ts
+
+      - name: Tests
+        run: deno test --allow-all

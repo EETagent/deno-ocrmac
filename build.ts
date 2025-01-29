@@ -36,8 +36,7 @@ const lib = await Deno.readFile("lib.dylib");
 
 const libBase64 = encodeBase64(lib);
 
-const libExport =
-  `import { decodeBase64 } from "jsr:@std/encoding/base64";
+const libExport = `import { decodeBase64 } from "jsr:@std/encoding/base64";
 export default decodeBase64("${libBase64}");`;
 
 await Deno.writeTextFile("lib.ts", libExport);

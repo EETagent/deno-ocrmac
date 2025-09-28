@@ -1,4 +1,4 @@
-import { encodeBase64 } from "https://esm.sh/jsr/@std/encoding@1.0.6/base64";
+import { encodeBase64 } from "jsr:@std/encoding@1.0.10/base64"
 
 // Creates a universal library for both Intel and Apple Silicon
 const compileProcess = new Deno.Command("clang", {
@@ -37,7 +37,7 @@ const lib = await Deno.readFile("lib.dylib");
 const libBase64 = encodeBase64(lib);
 
 const libExport =
-  `import { decodeBase64 } from "https://esm.sh/jsr/@std/encoding@1.0.6/base64";
+  `import { decodeBase64 } from "jsr:@std/encoding@1.0.10/base64";
 export default decodeBase64("${libBase64}");`;
 
 await Deno.writeTextFile("lib.ts", libExport);

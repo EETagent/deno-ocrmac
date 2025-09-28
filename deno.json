@@ -4,6 +4,9 @@
   "license": "WTFPL license",
   "exports": "./mod.ts",
   "nodeModulesDir": "none",
+  "publish": {
+    "include": ["LICENSE", "README.md", "./**/*.ts", "./lib.m"]
+  },
   "lint": {
     "rules": {
       "exclude": ["no-import-prefix"]

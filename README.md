@@ -2,13 +2,13 @@
 import OCRMac, {
   Orientation,
   RecognitionLevel,
-} from "https://esm.sh/gh/EETagent/deno-ocrmac@3b9b745/mod.ts";
+} from "jsr:@eetagent/deno-ocrmac";
 
 using ocr = new OCRMac();
 
 const result = await ocr.getTextFromImageByteArray(
   Deno.readFileSync("./image.png"),
-  RecognitionLevel.Fast,
+  RecognitionLevel.Accurate,
   true,
   Orientation.Left,
 );

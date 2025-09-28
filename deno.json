@@ -1,6 +1,6 @@
 {
   "name": "@eetagent/deno-ocrmac",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "WTFPL license",
   "exports": "./mod.ts",
   "nodeModulesDir": "none"

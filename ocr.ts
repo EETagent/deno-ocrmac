@@ -1,4 +1,4 @@
-import { Result } from "./api.ts";
+import type { Result } from "./api.ts";
 import {
   getTextFromImageByteArray,
   loadLibrary,

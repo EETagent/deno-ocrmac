@@ -3,5 +3,10 @@
   "version": "1.0.1",
   "license": "WTFPL license",
   "exports": "./mod.ts",
-  "nodeModulesDir": "none"
+  "nodeModulesDir": "none",
+  "lint": {
+    "rules": {
+      "exclude": ["no-import-prefix"]
+    }
+  }
 }

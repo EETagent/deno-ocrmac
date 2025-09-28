@@ -1,4 +1,4 @@
-import { encodeBase64 } from "jsr:@std/encoding@1.0.10/base64"
+import { encodeBase64 } from "jsr:@std/encoding@1.0.10/base64";
 
 // Creates a universal library for both Intel and Apple Silicon
 const compileProcess = new Deno.Command("clang", {

@@ -40,7 +40,7 @@ export class OCRMac {
    * @throws {Error} If there was an error recognizing the text.
    */
   public async getTextFromImageByteArray(
-    bytes: Uint8Array,
+    bytes: Uint8Array<ArrayBuffer>,
     recognitionLevel = RecognitionLevel.Accurate,
     languageCorrection = false,
     imageOrientation = Orientation.Up,

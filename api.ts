@@ -55,7 +55,7 @@ export type Result = Array<{
 
 export const getTextFromImageByteArray = async (
   dylib: Dylib,
-  bytes: Uint8Array,
+  bytes: Uint8Array<ArrayBuffer>,
   recognitionLevel = RecognitionLevel.Accurate,
   languageCorrection = false,
   imageOrientation = Orientation.Up,
